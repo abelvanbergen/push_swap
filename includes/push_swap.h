@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/18 12:37:47 by abelfrancis   ########   odam.nl         */
+/*   Updated: 2022/02/19 11:46:38 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ typedef struct s_stack
 void	print_stacks(t_stack *a, t_stack *b);
 void	ft_putstr_fd(int fd, char *str);
 
+int		ft_strlen(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strdup(const char *str);
+char	*ft_strjoin_and_free_s1(char *s1, char *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	exit_with_message(int exitcode, char *message);
-int		ft_strlen(char *str);
 void	*malloc_check(void *data);
 bool	ft_isnumber(char *str);
 int		ft_basic_itoa(char *str);
@@ -42,5 +48,9 @@ void	swap(t_stack *stack);
 void	push(t_stack *dest, t_stack *src);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
+
+void	double_swap(t_stack *a, t_stack *b);
+void	double_rotate(t_stack *a, t_stack *b);
+void	double_reverse_rotate(t_stack *a, t_stack *b);
 
 #endif

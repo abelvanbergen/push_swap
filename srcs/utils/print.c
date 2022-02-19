@@ -6,13 +6,13 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:26:15 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/18 12:38:20 by abelfrancis   ########   odam.nl         */
+/*   Updated: 2022/02/19 14:06:04 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>//
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
 void	print_stacks(t_stack *a, t_stack *b)
 {

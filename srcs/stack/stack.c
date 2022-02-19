@@ -3,14 +3,15 @@
 /*                                                        ::::::::            */
 /*   stack.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
+/*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/18 10:30:05 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/18 12:38:43 by abelfrancis   ########   odam.nl         */
+/*   Created: 2022/02/19 14:07:01 by avan-ber      #+#    #+#                 */
+/*   Updated: 2022/02/19 17:48:17 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
+#include <stdbool.h>
 
 static bool	isDuplicate(t_stack *stack, int nb)
 {
@@ -20,10 +21,10 @@ static bool	isDuplicate(t_stack *stack, int nb)
 	while (i < stack->size)
 	{
 		if (stack->stack[i] == nb)
-			return true;
+			return (true);
 		i++;
 	}
-	return false;
+	return (false);
 }
 
 void	add_number_to_stack(t_stack *stack, int nb)

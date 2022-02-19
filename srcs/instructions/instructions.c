@@ -6,11 +6,12 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:34:06 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/18 12:33:40 by abelfrancis   ########   odam.nl         */
+/*   Updated: 2022/02/19 14:06:05 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
+#include <stdio.h>
 
 void	swap(t_stack *stack)
 {
