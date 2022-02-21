@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/19 11:46:38 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/21 17:36:24 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ typedef struct s_stack
 	unsigned int	capacity;
 }					t_stack;
 
+typedef void	(*t_rotate)(t_stack*);
+
+typedef struct s_numberinfo
+{
+	unsigned int	idx;
+	int				nb;
+	t_rotate		r;
+	char			str[5];
+}					t_numberinfo;
+
 void	print_stacks(t_stack *a, t_stack *b);
 void	ft_putstr_fd(int fd, char *str);
 
@@ -40,9 +50,8 @@ bool	ft_isnumber(char *str);
 int		ft_basic_itoa(char *str);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
-void	add_number_to_stack(t_stack *stack, int nb);
-void	add_new_number_to_stack(t_stack *stack, int nb);
-void	stack_init(t_stack *a, t_stack *b, int ac, char **av);
+void	stack_init_push_swap(t_stack *a, t_stack *b, int ac, char **av);
+void	stack_init_checker(t_stack *a, t_stack *b, int ac, char **av);
 
 void	swap(t_stack *stack);
 void	push(t_stack *dest, t_stack *src);
