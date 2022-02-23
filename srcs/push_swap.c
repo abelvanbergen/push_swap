@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/21 17:36:03 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/22 10:09:16 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	main(int ac, char **av)
 	t_stack a;
 	t_stack b;
 
-	stack_init_push_swap(&a, &b, ac -, av + 1);
+	if (ac == 1)
+		return (1);
+	stack_init_push_swap(&a, &b, ac, av);
 	order_simple(&a, &b);
 	print_stacks(&a, &b);
 }

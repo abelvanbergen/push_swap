@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/21 17:36:24 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/22 11:45:32 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ bool	ft_isnumber(char *str);
 int		ft_basic_itoa(char *str);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
+unsigned int	get_idx_nb(t_stack *stack, int nb);
+int	get_max_nb(t_stack *stack);
+bool	is_duplicate(t_stack *stack, int nb);
+
+void	add_nb_to_stack(t_stack *stack, int nb);
+void	add_nb_to_stack_on_idx(t_stack *stack, int nb, unsigned int idx);
+void	add_new_nb_to_stack(t_stack *stack, int nb);
+void	remove_nb_from_stack(t_stack *stack, unsigned int idx);
+void	stack_cpy(t_stack *dest, t_stack *src);
+
+void	stack_init_empty(t_stack *stack, unsigned int capacity);
 void	stack_init_push_swap(t_stack *a, t_stack *b, int ac, char **av);
 void	stack_init_checker(t_stack *a, t_stack *b, int ac, char **av);
 

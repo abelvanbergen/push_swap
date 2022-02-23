@@ -6,7 +6,7 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:34:06 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/19 14:06:05 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/22 10:04:23 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	push(t_stack *dest, t_stack *src)
 {
 	if (src->size == 0)
 		return ;
-	add_number_to_stack(dest, src->stack[src->size - 1]);
+	add_nb_to_stack(dest, src->stack[src->size - 1]);
 	src->size--;
 }
 

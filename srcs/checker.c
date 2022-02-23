@@ -6,7 +6,7 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 12:49:32 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/19 14:46:19 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/22 10:08:14 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (1);
-	stack_init(&a, &b, ac, av);
+	stack_init_checker(&a, &b, ac, av);
 	instructions = get_instructions();
 	if (instructions == NULL)
 		return (1);
