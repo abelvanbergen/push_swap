@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 14:07:01 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/22 19:18:16 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/25 13:37:05 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ static void	stack_init_with_basic_values(t_stack *dest, t_stack *location, t_sta
 	unsigned int	nb;
 
 	stack_init_empty(dest, location->capacity);
-	print_stacks(location, dest);
 	nb = location->capacity - 1;
-	printf("begin loop\n");
 	while (order->size > 0)
 	{
-		print_stacks(dest, order);
 		max_nb = get_max_nb(order);
 		idx = get_idx_nb(location, max_nb);
-		printf("max_nb: %i\nnb %u -> loc %u\n", max_nb, nb, idx);
 		add_nb_to_stack_on_idx(dest, nb, idx);
 		nb--;
 		remove_nb_from_stack(order, get_idx_nb(order, max_nb));
@@ -64,13 +60,8 @@ void	stack_init_push_swap(t_stack *a, t_stack *b, int ac, char **av)
 	(void)b;
 	stack_init_with_arguments(&location, ac - 1, av);
 	stack_cpy(&order, &location);
-	print_stacks(&location, &order);
 	stack_init_with_basic_values(a, &location, &order);
-	print_stacks(&location, &order);
-	print_stacks(&location, a);
-	exit(1);
-	// stack_init_empty(b, a->capacity);
-	// print_stacks(a, b);
+	stack_init_empty(b, a->capacity);
 }
 
 void	stack_init_checker(t_stack *a, t_stack *b, int ac, char **av)

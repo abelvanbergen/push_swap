@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/22 11:45:32 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/25 17:27:31 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+
+typedef struct s_2int
+{
+	int	first;
+	int	second;
+}		t_2int;
+
+typedef struct s_bucket_info
+{
+	unsigned int	groups;
+	t_2int			*borders;
+}				t_bucket_info;
 
 typedef struct s_stack
 {
@@ -72,5 +84,6 @@ void	reverse_rotate(t_stack *stack);
 void	double_swap(t_stack *a, t_stack *b);
 void	double_rotate(t_stack *a, t_stack *b);
 void	double_reverse_rotate(t_stack *a, t_stack *b);
+void	push_bottum(t_stack *dest, t_stack *srcs);
 
 #endif

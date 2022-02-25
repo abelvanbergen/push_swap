@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 11:43:34 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/19 14:06:06 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/25 13:28:03 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ void	double_reverse_rotate(t_stack *a, t_stack *b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
+}
+
+void	push_bottum(t_stack *dest, t_stack *srcs)
+{
+	push(dest, srcs);
+	rotate(dest);
 }

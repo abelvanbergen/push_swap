@@ -6,64 +6,82 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/22 10:09:16 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/25 17:36:21 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "../includes/push_swap.h"
 
-t_numberinfo	get_min_nb_info_in_stack(t_stack *stack)
+// void	split_first_bucket(t_stack *dest, t_stack *srcs, unsigned int len, int div)
+// {
+// 	unsigned int	i;
+
+// 	i = 0;
+// 	while (i < len)
+// 	{
+// 		if (srcs->stack[srcs->size - 1] >= div)
+// 		{
+// 			write(1, "pb\n", 3);
+// 			push(dest, srcs);
+// 		}
+// 		else
+// 		{
+// 			write(1, "pb\nrb\n", 6);
+// 			push_bottum(dest, srcs);
+// 		}
+// 		i++;
+// 	}
+// }
+
+// void	move_bucket_to_top(t_stack *stack, unsigned int size)
+// {
+// 	unsigned int	i;
+
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		write(1, "rrb\n", 4);
+// 		reverse_rotate(stack);
+// 		i++;
+// 	}
+// }
+
+// void	split_not_first_bucket(t_stack *dest, t_stack *srcs, unsigned int len, int div)
+// {
+// 	split_first_bucket(dest, srcs, len, div);
+// 	move_bucket_to_top(dest, 5);
+// }
+
+void	set_bucket_borders(t_2int borders, unsigned int size, unsigned int start)
+{
+	
+}
+
+void	bucket_info_init(t_bucket_info *obj)
 {
 	unsigned int	i;
-	t_numberinfo	nb_info;
+	t_2int			*new_borders;
 
-	nb_info.idx = 0;
-	nb_info.nb = stack->stack[0];
-	i = 1;
-	while (i < stack->size)
+	new_borders = malloc_check(malloc(sizeof(t_2int) * (obj->groups)));
+	i = 0;
+	while (i < obj->groups)
 	{
-		if (stack->stack[i] < nb_info.nb)
-		{
-			nb_info.nb = stack->stack[i];
-			nb_info.idx = i;
-		}
-		i++;
+		
 	}
-	if (stack->size / 2 > nb_info.idx)
-	{
-		nb_info.r = reverse_rotate;
-		ft_strlcpy(nb_info.str, "rra\n", 5);
-	}
-	else
-	{
-		nb_info.r = rotate;
-		ft_strlcpy(nb_info.str, "ra\n", 4);
-	}
-	return (nb_info);
 }
 
-void	order_simple(t_stack *a, t_stack *b)
+void	split_buckets(t_bucket_info bucket_info, t_stack *dest, t_stack *srcs)
 {
-	t_numberinfo	nb_info;
-
-	while (a->size > 1)
-	{
-		nb_info = get_min_nb_info_in_stack(a);
-		while (a->stack[a->size - 1] != nb_info.nb)
-		{
-			nb_info.r(a);
-			ft_putstr_fd(1, nb_info.str);
-		}
-		push(b, a);
-		ft_putstr_fd(1, "pb\n");
-	}
-	while (b->size > 0)
-	{
-		push(a, b);
-		ft_putstr_fd(1, "pa\n");
-	}
+	
 }
+
+// void	split_first_time_3(t_stack *dest, t_stack *srcs)
+// {
+// 	t_2int	borders;
+
+// 	borders = get_boarders_bucket();
+// }
 
 int	main(int ac, char **av)
 {
@@ -73,6 +91,11 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		return (1);
 	stack_init_push_swap(&a, &b, ac, av);
-	order_simple(&a, &b);
+	print_stacks(&a, &b);
+	split_first_bucket(&b, &a, a.size, a.size / 2);
+	print_stacks(&a, &b);
+	split_first_bucket(&a, &b, b.size / 2, 15);
+	print_stacks(&a, &b);
+	split_not_first_bucket(&a, &b, b.size, 5);
 	print_stacks(&a, &b);
 }
