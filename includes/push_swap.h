@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/25 17:27:31 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/02/26 13:25:25 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ typedef struct s_2int
 
 typedef struct s_bucket_info
 {
+	int				*groupsize;
 	unsigned int	groups;
 	t_2int			*borders;
 }				t_bucket_info;
 
 typedef struct s_stack
 {
+	char			name;
 	int				*stack;
 	unsigned int	size;
 	unsigned int	capacity;
@@ -38,13 +40,6 @@ typedef struct s_stack
 
 typedef void	(*t_rotate)(t_stack*);
 
-typedef struct s_numberinfo
-{
-	unsigned int	idx;
-	int				nb;
-	t_rotate		r;
-	char			str[5];
-}					t_numberinfo;
 
 void	print_stacks(t_stack *a, t_stack *b);
 void	ft_putstr_fd(int fd, char *str);

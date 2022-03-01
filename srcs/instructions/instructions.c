@@ -6,7 +6,7 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:34:06 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/22 10:04:23 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/03/01 16:32:14 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	swap(t_stack *stack)
 {
 	int	temp;
 
+	printf("s%c\n", stack->name);
 	if (stack->size <= 1)
 		return ;
 	temp = stack->stack[stack->size - 1];
@@ -26,6 +27,7 @@ void	swap(t_stack *stack)
 
 void	push(t_stack *dest, t_stack *src)
 {
+	printf("p%c\n", dest->name);
 	if (src->size == 0)
 		return ;
 	add_nb_to_stack(dest, src->stack[src->size - 1]);
@@ -36,6 +38,7 @@ void	rotate(t_stack *stack)
 {
 	int	temp;
 
+	printf("r%c\n", stack->name);
 	if (stack->size <= 1)
 		return ;
 	temp = stack->stack[stack->size - 1];
@@ -47,6 +50,7 @@ void	reverse_rotate(t_stack *stack)
 {
 	int	temp;
 
+	printf("rr%c\n", stack->name);
 	if (stack->size <= 1)
 		return ;
 	temp = stack->stack[0];
