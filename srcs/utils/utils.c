@@ -6,7 +6,7 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:27:22 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/02/19 14:05:56 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/03/01 21:28:32 by abelfrancis   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	exit_with_message(int exitcode, char *message)
 {
-	ft_putstr_fd(2, "error:\n");
-	ft_putstr_fd(2, message);
-	ft_putstr_fd(2, "\n");
+	(void)message;
+	ft_putstr_fd(2, "Error\n");
 	exit(exitcode);
 }
 
