@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/03/01 22:13:14 by abelfrancis   ########   odam.nl         */
+/*   Updated: 2022/03/02 17:03:45 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,14 +143,13 @@ void	radix_sort_3_new(t_stack *a, t_stack *b)
 	exp = 0;
 	while (biggest_nb / ft_pow(3, exp) != 0)
 	{
-		if (exp)
 		amount_middle = divide_in_three(b, a, ft_pow(3, exp), 2);
 		place_back(a, b, amount_middle);
 		exp++;
 	}
 }
 
-void	buildup_stack_3_new_new(t_stack *dest, t_stack *srcs, int pow)
+void	buildup_stack_3_new_new(t_stack *dest, t_stack *srcs, int pow, int bottum_value)
 {
 	unsigned int		i;
 	int					val;
@@ -161,7 +160,7 @@ void	buildup_stack_3_new_new(t_stack *dest, t_stack *srcs, int pow)
 	while (i < stack_size)
 	{
 		val = (srcs->stack[srcs->size - 1] / pow) % 3;
-		if (val == 2)
+		if (val == bottum_value)
 			push(dest, srcs);
 		else
 			rotate(srcs);
@@ -182,22 +181,93 @@ void	buildup_stack_3_new_new(t_stack *dest, t_stack *srcs, int pow)
 		push(dest, srcs);
 }
 
-void	radix_sort_3_new_new(t_stack *a, t_stack *b)
+int		get_amount_of_splits(int biggest_nb)
 {
-	const int	biggest_nb = a->size - 1;
-	int			exp;
+	int		exp;
 
 	exp = 0;
 	while (biggest_nb / ft_pow(3, exp) != 0)
+		exp++;
+	return (exp);
+}
+
+bool	is_sorted(t_stack *stack)
+{
+	unsigned int	i;
+
+	i = 1;
+	if (stack->size == 1)
+		return (true);
+	while (i < stack->size)
 	{
-		if (exp % 2 == 0)
-			buildup_stack_3_new_new(b, a, ft_pow(3, exp));
+		if (stack->stack[i] > stack->stack[i - 1])
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+void	last_turn(t_stack *a, t_stack *b, int pow)
+{
+	int	stack_size;
+	int	val;
+	int	i;
+
+	i = 0;
+	stack_size = a->size;
+	while (i < stack_size)
+	{
+		val = (a->stack[a->size - 1] / pow) % 3;
+		if (val == 0)
+			push(b, a);
 		else
-			buildup_stack_3_new_new(a, b, ft_pow(3, exp));
+			rotate(a);
+		if (a->stack[0] == stack_size - 1 && is_sorted(a))
+			return ;
+		i++;
+	}
+	i = 0;
+	stack_size = a->size;
+	while (i < stack_size)
+	{
+		val = (a->stack[a->size - 1] / pow) % 3;
+		if (val == 1)
+			push(b, a);
+		else
+			rotate(a);
+		if (a->stack[0] == stack_size - 1 && is_sorted(a))
+			return ;
+		i++;
+	}
+}
+
+void	radix_sort_3_new_new(t_stack *a, t_stack *b)
+{
+	int		max_exp;
+	bool	sorted;
+	int		exp;
+
+	sorted = true;
+	max_exp = get_amount_of_splits(a->size - 1);
+	if (max_exp % 2 == 1)
+	{
+		sorted = false;
+		max_exp--;
+	}
+	exp = 0;
+	while (exp < max_exp)
+	{
+		buildup_stack_3_new_new(b, a, ft_pow(3, exp), 0);
+		exp++;
+		buildup_stack_3_new_new(a, b, ft_pow(3, exp), 2);
 		exp++;
 	}
-	if (a->size == 0)
-		move_to(a, b);
+	if (sorted == false)
+	{
+		last_turn(a, b, ft_pow(3, exp));
+		while (b->size > 0)
+			push(a, b);
+	}
 }
 
 void	radix_sort_2(t_stack *a, t_stack *b)
