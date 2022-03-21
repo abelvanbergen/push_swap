@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/03/02 17:03:45 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/03/03 09:48:52 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void	radix_sort_2(t_stack *a, t_stack *b)
 
 	exp = 0;
 	pow = ft_pow(2, exp);
-	while ((stack_size - 1) / pow != 0)
+	while ((stack_size - 1) > pow)
 	{
 		i = 0;
 		while (i < stack_size)
@@ -316,5 +316,5 @@ int	main(int ac, char **av)
 	else if (a.size == 3)
 		sort_3_numbers(&a);
 	else
-		radix_sort_3_new_new(&a, &b);
+		radix_sort_2(&a, &b);
 }

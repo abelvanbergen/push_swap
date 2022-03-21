@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 14:07:01 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/25 13:37:05 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/03/03 09:41:28 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	stack_init_push_swap(t_stack *a, t_stack *b, int ac, char **av)
 	(void)b;
 	stack_init_with_arguments(&location, ac - 1, av);
 	stack_cpy(&order, &location);
-	stack_init_with_basic_values(a, &location, &order);
+	stack_init_with_basic_values(a, &location, &order); //memorie_leak
 	stack_init_empty(b, a->capacity);
 }
 

@@ -6,7 +6,7 @@
 #    By: avan-ber <avan-ber@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/19 13:14:02 by avan-ber      #+#    #+#                  #
-#    Updated: 2022/03/02 09:25:30 by avan-ber      ########   odam.nl          #
+#    Updated: 2022/03/03 09:58:23 by avan-ber      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,4 +40,4 @@ re: fclean all
 .PHONY: all clean fclean re
 
 py: all
-	python3 pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+	python3 pyviz.py `ruby -e "puts (1..128).to_a.shuffle.join(' ')"`
