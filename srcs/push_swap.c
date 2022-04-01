@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/04/01 13:08:37 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/04/01 17:31:43 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,22 @@ int		get_amount_of_splits(int biggest_nb)
 	return (exp);
 }
 
+bool	is_reversed_sorted(t_stack *stack)
+{
+	unsigned int	i;
+
+	i = 1;
+	if (stack->size == 1)
+		return (true);
+	while (i < stack->size)
+	{
+		if (stack->stack[i] < stack->stack[i - 1])
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	is_sorted(t_stack *stack)
 {
 	unsigned int	i;
@@ -215,7 +231,7 @@ void	radix_sort_2(t_stack *a, t_stack *b) // AVG 100->1084 500->6784
 
 	exp = 0;
 	pow = ft_pow(2, exp);
-	while ((stack_size) > pow)
+	while (stack_size > pow)
 	{
 		i = 0;
 		while (i < stack_size)
@@ -231,6 +247,138 @@ void	radix_sort_2(t_stack *a, t_stack *b) // AVG 100->1084 500->6784
 			push(a, b);
 		exp++;
 		pow = ft_pow(2, exp);
+	}
+}
+
+void	return_stack_b(t_stack *a, t_stack *b)
+{
+	while (b->size > 0)
+		push(a, b);
+}
+
+void	last_turn_ultra(t_stack *a, t_stack *b, unsigned int pow)
+{
+	unsigned int		len_b;
+	unsigned int		len_a;
+	unsigned int		i;
+	int					val;
+
+	len_b = b->size;
+	i = 0;
+	while (i < len_b)
+	{
+		if (is_sorted(a) && is_sorted(b))
+			return (return_stack_b(a, b));
+		val = (b->stack[b->size - 1] / pow) % 2;
+		if (val == 0)
+			rotate(b);
+		else
+			push(a, b);
+		i++;
+	}
+	i = 0;
+	len_a = a->size;
+	while (i < len_a)
+	{
+		if (is_sorted(a) && is_sorted(b))
+			return (return_stack_b(a, b));
+		val = (a->stack[a->size - 1] / pow) % 2;
+		if (val == 1)
+			rotate(a);
+		else
+			push(b, a);
+		i++;
+	}
+}
+
+void	radix_sort_ultra(t_stack *a, t_stack *b)
+{
+	const unsigned int	stack_size = a->size;
+	const unsigned int	base = 2;
+	unsigned int		pow;
+	unsigned int		len_b;
+	unsigned int		len_a;
+	unsigned int		i;
+	int					val;
+
+	pow = 1;
+	while (stack_size / 2 > pow)
+	{
+		len_b = b->size;
+		i = 0;
+		while (i < len_b)
+		{
+			val = (b->stack[b->size - 1] / pow) % 2;
+			if (val == 0)
+				rotate(b);
+			else
+				push(a, b);
+			i++;
+		}
+		i = 0;
+		len_a = a->size;
+		while (i < len_a)
+		{
+			val = (a->stack[a->size - 1] / pow) % 2;
+			if (val == 1)
+				rotate(a);
+			else
+				push(b, a);
+			i++;
+		}
+		pow *= base;
+	}
+	last_turn_ultra(a, b, pow);
+}
+
+void	set_back_b(t_stack *a, t_stack *b, int base, int pow, bool last_time)
+{
+	int				to_move;
+	int				val;
+	unsigned int	len;
+
+	to_move = base - 2;
+	while (to_move > 0)
+	{
+		len = b->size;
+		while (len > 0)
+		{
+			if (last_time == true && is_reversed_sorted(b))
+				return (return_stack_b(a, b));
+			val = (b->stack[b->size - 1] / pow) % base;
+			if (val == to_move)
+				push(a, b);
+			else
+				rotate(b);
+			len--;
+		}
+		to_move--;
+	}
+	return_stack_b(a, b);
+}
+
+void	radix_sort_base(t_stack *a, t_stack *b, int base)
+{
+	const unsigned int	stack_size = a->size;
+	unsigned int		pow;
+	unsigned int		i;
+	int					val;
+
+	pow = 1;
+	while (stack_size > pow)
+	{
+		i = 0;
+		while (i < stack_size)
+		{
+			val = (a->stack[a->size - 1] / pow) % base;
+			if (val == base - 1)
+				rotate(a);
+			else
+				push(b, a);
+			i++;
+		}
+		set_back_b(a, b, base, pow, stack_size / base > pow);
+		pow *= base;
 	}
 }
 
