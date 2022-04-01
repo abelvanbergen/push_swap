@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 19:51:51 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/02/26 13:25:25 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/04/01 13:09:16 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_stack
 
 typedef void	(*t_rotate)(t_stack*);
 
-
 void	print_stacks(t_stack *a, t_stack *b);
 void	ft_putstr_fd(int fd, char *str);
 
@@ -54,8 +53,13 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	exit_with_message(int exitcode, char *message);
 void	*malloc_check(void *data);
 bool	ft_isnumber(char *str);
-int		ft_basic_itoa(char *str);
+bool	ft_basic_atoi(char *str, int *res);
 void	*ft_memmove(void *dst, const void *src, size_t len);
+
+void	sort_2_numbers(t_stack *a);
+void	sort_3_numbers(t_stack *a);
+void	sort_4_numbers(t_stack *a, t_stack *b);
+void	sort_5_numbers(t_stack *a, t_stack *b);
 
 unsigned int	get_idx_nb(t_stack *stack, int nb);
 int	get_max_nb(t_stack *stack);

@@ -6,38 +6,13 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/03/03 09:48:52 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/04/01 13:08:37 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "../includes/push_swap.h"
 #include <stdio.h> //
-
-void	sort_3_numbers(t_stack *a)
-{
-	if (a->stack[0] < a->stack[1] || a->stack[0] < a->stack[2])
-	{
-		if (a->stack[1] > a->stack[2])
-			reverse_rotate(a);
-		else
-			rotate(a);
-	}
-	if (a->stack[1] < a->stack[2])
-		swap(a);
-}
-
-void	sort_2_numbers(t_stack *a)
-{
-	if (a->stack[0] < a->stack[1])
-		swap(a);
-}
-
-void	move_to(t_stack *dest, t_stack *srcs)
-{
-	while (srcs->size > 0)
-		push(dest, srcs);
-}
 
 static int	ft_pow(unsigned int base, unsigned int exp)
 {
@@ -52,46 +27,6 @@ static int	ft_pow(unsigned int base, unsigned int exp)
 		exp--;
 	}
 	return (nb);
-}
-
-void	buildup_stack_3(t_stack *dest, t_stack *srcs, int pow, int topvalue)
-{
-	unsigned int		i;
-	int					val;
-	const unsigned int	stack_size = srcs->size;
-
-	i = 0;
-	while (i < stack_size)
-	{
-		val = (srcs->stack[srcs->size - 1] / pow) % 3;
-		if (val == topvalue)
-			rotate(srcs);
-		else if (val == 1)
-			push(dest, srcs);
-		else
-			push_bottum(dest, srcs);
-		i++;
-	}
-	while (srcs->size > 0)
-		push(dest, srcs);
-}
-
-void	radix_sort_3(t_stack *a, t_stack *b)
-{
-	const int	biggest_nb = a->size - 1;
-	int			exp;
-
-	exp = 0;
-	while (biggest_nb / ft_pow(3, exp) != 0)
-	{
-		if (exp % 2 == 0)
-			buildup_stack_3(b, a, ft_pow(3, exp), 2);
-		else
-			buildup_stack_3(a, b, ft_pow(3, exp), 0);
-		exp++;
-	}
-	if (a->size == 0)
-		move_to(a, b);
 }
 
 int	divide_in_three(t_stack *dest, t_stack *srcs, int pow, int topvalue)
@@ -134,7 +69,7 @@ void	place_back(t_stack *dest, t_stack *srcs, int amount_middle)
 	}
 }
 
-void	radix_sort_3_new(t_stack *a, t_stack *b)
+void	radix_sort_3_new(t_stack *a, t_stack *b) // AVG 100->1341 500->7371
 {
 	const int	biggest_nb = a->size - 1;
 	int			exp;
@@ -154,7 +89,7 @@ void	buildup_stack_3_new_new(t_stack *dest, t_stack *srcs, int pow, int bottum_v
 	unsigned int		i;
 	int					val;
 	unsigned int		stack_size;
-	
+
 	i = 0;
 	stack_size = srcs->size;
 	while (i < stack_size)
@@ -241,7 +176,7 @@ void	last_turn(t_stack *a, t_stack *b, int pow)
 	}
 }
 
-void	radix_sort_3_new_new(t_stack *a, t_stack *b)
+void	radix_sort_3_new_new(t_stack *a, t_stack *b) // AVG 100->866 500->6222
 {
 	int		max_exp;
 	bool	sorted;
@@ -270,7 +205,7 @@ void	radix_sort_3_new_new(t_stack *a, t_stack *b)
 	}
 }
 
-void	radix_sort_2(t_stack *a, t_stack *b)
+void	radix_sort_2(t_stack *a, t_stack *b) // AVG 100->1084 500->6784
 {
 	const unsigned int	stack_size = a->size;
 	unsigned int		pow;
@@ -280,7 +215,7 @@ void	radix_sort_2(t_stack *a, t_stack *b)
 
 	exp = 0;
 	pow = ft_pow(2, exp);
-	while ((stack_size - 1) > pow)
+	while ((stack_size) > pow)
 	{
 		i = 0;
 		while (i < stack_size)
@@ -315,6 +250,10 @@ int	main(int ac, char **av)
 		sort_2_numbers(&a);
 	else if (a.size == 3)
 		sort_3_numbers(&a);
+	else if (a.size == 4)
+		sort_4_numbers(&a, &b);
+	else if (a.size == 5)
+		sort_5_numbers(&a, &b);
 	else
-		radix_sort_2(&a, &b);
+		radix_sort_3_new_new(&a, &b);
 }

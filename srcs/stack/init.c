@@ -6,12 +6,13 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 14:07:01 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/03/03 09:41:28 by avan-ber      ########   odam.nl         */
+/*   Updated: 2022/03/28 20:08:06 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 #include <stdbool.h>
+#include <limits.h> //
 #include <stdio.h> //
 
 void	stack_init_empty(t_stack *stack, unsigned int capacity)
@@ -41,12 +42,16 @@ static void	stack_init_with_basic_values(t_stack *dest, t_stack *location, t_sta
 
 static void	stack_init_with_arguments(t_stack *stack, unsigned int len, char **av)
 {
+	int	nb;
+
 	stack_init_empty(stack, len);
 	while (len > 0)
 	{
 		if (!ft_isnumber(av[len]))
 			exit_with_message(1, "not a number");
-		add_new_nb_to_stack(stack, ft_basic_itoa(av[len]));
+		if (!ft_basic_atoi(av[len], &nb))
+			exit_with_message(1, "to big for a interger");
+		add_new_nb_to_stack(stack, nb);
 		len--;
 	}
 }

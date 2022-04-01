@@ -6,7 +6,7 @@
 /*   By: abelfranciscusvanbergen <abelfranciscus      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/18 10:27:22 by abelfrancis   #+#    #+#                 */
-/*   Updated: 2022/03/01 21:28:32 by abelfrancis   ########   odam.nl         */
+/*   Updated: 2022/03/28 20:08:36 by avan-ber      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,11 @@ bool	ft_isnumber(char *str)
 	return (true);
 }
 
-int		ft_basic_itoa(char *str)
+bool	ft_basic_atoi(char *str, int *res)
 {
-	long	nb;
 	int		i;
 	int		neg;
+	long	nb;
 
 	i = 0;
 	neg = 1;
@@ -175,9 +175,15 @@ int		ft_basic_itoa(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		nb = nb * 10 + str[i] - '0';
+		if (nb > (long)INT32_MAX + 1)
+			return (false);
 		i++;
 	}
-	return (nb * neg);
+	nb *= neg;
+	*res = nb;
+	if (*res != nb)
+		return (false);
+	return (true);
 }
 
 void	*ft_memmove(void *dst, const void *src, size_t len)

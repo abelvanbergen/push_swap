@@ -6,7 +6,7 @@
 #    By: avan-ber <avan-ber@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/19 13:14:02 by avan-ber      #+#    #+#                  #
-#    Updated: 2022/03/03 09:58:23 by avan-ber      ########   odam.nl          #
+#    Updated: 2022/04/01 13:10:59 by avan-ber      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CHECKER_FILES =		srcs/checker.c
 PUSH_SWAP_FILES =	srcs/push_swap.c
 FILES =				srcs/instructions/instructions.c \
 					srcs/instructions/double_instructions.c \
+					srcs/solver/small_stacks.c \
 					srcs/stack/adjust.c \
 					srcs/stack/init.c \
 					srcs/stack/utils.c \
@@ -40,4 +41,4 @@ re: fclean all
 .PHONY: all clean fclean re
 
 py: all
-	python3 pyviz.py `ruby -e "puts (1..128).to_a.shuffle.join(' ')"`
+	python3 pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
