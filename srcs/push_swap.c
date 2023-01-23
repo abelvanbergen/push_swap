@@ -6,7 +6,7 @@
 /*   By: avan-ber <avan-ber@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 13:55:19 by avan-ber      #+#    #+#                 */
-/*   Updated: 2022/04/01 17:31:43 by avan-ber      ########   odam.nl         */
+/*   Updated: 2023/01/22 21:10:01 by abelfrancis   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,125 @@ void	radix_sort_base(t_stack *a, t_stack *b, int base)
 	}
 }
 
+void radix_sort_4(t_stack *a, t_stack *b, int pow)
+{
+	const unsigned int	stack_size = a->size;
+	unsigned int	top;
+	unsigned int	bottum;
+	unsigned int	i;
+	int				val;
+
+	top = 0;
+	i = 0;
+	bottum = 0;
+	// printf("hij komt er wel in");
+	while (i < stack_size) {
+		val = (a->stack[a->size - 1] / pow) % 4;
+		if (val == 2) {
+			rotate(a);
+		}
+		else {
+			top += 1;
+			push(b, a);
+		}
+		if (val == 3) {
+			bottum += 1;
+			rotate(b);
+		}
+		i++;
+	}
+	top -= bottum;
+	i = 0;
+	while (i < top) {
+		val = (b->stack[b->size - 1] / pow) % 4;
+		if (val == 1) {
+			push(a, b);
+		} else {
+			rotate(b);
+		}
+		i++;
+	}
+	i = 0;
+	while (i < bottum) {
+		push(a, b);
+		rotate(a);
+		i++;
+	}
+	while (b->size) {
+		push(a, b);
+	}
+	pow *= 5;
+}
+
+void radix_sort_5(t_stack *a, t_stack *b)
+{
+	const unsigned int	stack_size = a->size;
+	unsigned int	top;
+	unsigned int	top_left;
+	unsigned int	bottum;
+	unsigned int	pow;
+	unsigned int	i;
+	int				val;
+
+	pow = 1;
+	while (stack_size > pow) {
+		if (stack_size == pow * 4)
+			return radix_sort_4(a, b, pow);
+		top = 0;
+		i = 0;
+		bottum = 0;
+		while (i < stack_size) {
+			val = (a->stack[a->size - 1] / pow) % 5;
+			if (val == 2) {
+				rotate(a);
+			}
+			else {
+				top += 1;
+				push(b, a);
+			}
+			if (val == 3 || val == 4) {
+				bottum += 1;
+				rotate(b);
+			}
+			i++;
+		}
+		top -= bottum;
+		i = 0;
+		top_left = 0;
+		while (i < top) {
+			val = (b->stack[b->size - 1] / pow) % 5;
+			if (val == 1) {
+				push(a, b);
+			} else {
+				top_left++;
+				rotate(b);
+			}
+			i++;
+		}
+		i = 0;
+		while (i < bottum) {
+			val = (b->stack[b->size - 1] / pow) % 5;
+			if (val == 3) {
+				push(a, b);
+				rotate(a);
+			} else {
+				rotate(b);
+			}
+			i++;
+		}
+		i = 0;
+		while (i < top_left) {
+			push(a, b);
+			i++;
+		}
+		while (b->size) {
+			push(a, b);
+			rotate(a);
+		}
+		pow *= 5;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_stack a;
@@ -403,5 +522,5 @@ int	main(int ac, char **av)
 	else if (a.size == 5)
 		sort_5_numbers(&a, &b);
 	else
-		radix_sort_3_new_new(&a, &b);
+		radix_sort_5(&a, &b);
 }

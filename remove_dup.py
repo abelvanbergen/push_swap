@@ -1,0 +1,1 @@
+print(len(open("test1").read().replace("ra\nrb\n", "rr\n").replace("rb\nra\n", "rr\n").splitlines()))
